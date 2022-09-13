@@ -1,0 +1,56 @@
+#include "01_Linked_List.cpp"
+#include <iostream>
+#include <string.h>
+#include <conio.h>
+using namespace std;
+#include "01_Linked_List.cpp"
+node *takeinput()
+{
+    node *head = NULL;
+    node *tail = NULL;
+    int element;
+    cout << "Enter : ";
+    cin >> element;
+    while (element != -1)
+    {
+        node *newnode = new node(element);
+
+        if (head == NULL)
+        {
+            head = newnode;
+            tail = newnode;
+        }
+        else
+        {
+            tail->next = newnode;
+            tail = newnode; // tail = tail->next;
+        }
+        cin >> element;
+    }
+}
+node *appendlast(node *head, int num)
+{
+    node *temp = head;
+    node *newhead = head;
+    int counter = -num;
+    while (temp->next != 0)
+    {
+        if (counter >= 0)
+        {
+            newhead = newhead->next;
+        }
+        temp = temp->next;
+        counter++;
+    }
+    temp->next = head;
+    head = newhead->next;
+    newhead->next = NULL;
+    return head;
+}
+int main()
+{
+    node *head = takeinput();
+    node *newhead = appendlast(head, 4);
+    print(newhead);
+    return 0;
+}
